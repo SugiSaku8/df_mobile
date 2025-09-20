@@ -49,6 +49,8 @@
           console.log('Shell found, loading apps...');
           window.shell.loadApp('welcome');
           window.shell.loadApp('about');
+          window.shell.showApp('welcome');
+          window.shell.showApp('about');
         } else {
           console.error('Shell not found');
         }

@@ -182,6 +182,7 @@ Examples:
 
   showApp(appName) {
     this.log({from: `dp.app.${appName}.out`, message: `${appName}アプリを表示中`, level: 'info'});
+    const previousApp = this.currentApp;
     this.currentApp = appName;
     this.log({from: `dp.app.${appName}.out`, message: `現在のアプリ: ${appName}`, level: 'info'});
 
@@ -192,7 +193,7 @@ Examples:
       appElement = document.createElement('div');
       appElement.id = `app-${appName}`;
       appElement.className = 'window';
-      appElement.style.display = 'block'; // 最初から表示状態に設定
+      appElement.style.display = 'block';
 
       // app-rootに追加
       const appRoot = document.getElementById('app-root');
@@ -202,6 +203,18 @@ Examples:
         document.body.appendChild(appElement);
       }
     }
+    
+    // 前のアプリを非表示に（存在する場合）
+    if (previousApp && previousApp !== appName) {
+      const previousAppElement = document.getElementById(`app-${previousApp}`);
+      if (previousAppElement) {
+        previousAppElement.style.display = 'none';
+      }
+    }
+    
+    // 現在のアプリを表示
+    appElement.style.display = 'block';
+    
     // menu.df.base.js の機能を実行（3Dカードレイヤー効果）
     this.showAppCard(appElement);
   }
