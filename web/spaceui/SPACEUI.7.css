@@ -1,8 +1,6 @@
 /*SpaceUI var:7.0.0.alpha.01*/
 
-body {
-  margin: auto auto auto;
-}
+
 			@font-face {
 				font-family: 'thin';
 				src: url('./Font/Apple/SFProJP_細い.woff')format('woff');
@@ -27,6 +25,9 @@ body {
       }
 			body {
 				font-family: 'auto', 'AppleGaramond';
+				height: 100vh;
+				margin: 0;
+				padding: 0;
 			}
 .c-switch-check {
   display: none;
@@ -247,6 +248,10 @@ body {
   background-color: #ffffff;
 }
 body {
+  font-family: 'auto', 'AppleGaramond';
+  height: 100vh;
+  margin: 0;
+  padding: 0;
   font-size: 18px;
 }
 
