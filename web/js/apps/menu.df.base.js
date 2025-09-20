@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Back button handlers
-    document.querySelectorAll('.close-btn-color').forEach(button => {
+    document.querySelectorAll('#close-btn-color').forEach(button => {
         button.addEventListener('click', function(e) {
             e.stopPropagation();
             const card = this.closest('.window');
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Add active class and show back button
         card.classList.add('active');
-        card.querySelector('.close-btn-color').classList.remove('hidden');
+        card.querySelector('#close-btn-color').classList.remove('hidden');
         
         // Update other cards
         updateCardLayers(card);
@@ -82,7 +82,10 @@ document.addEventListener('DOMContentLoaded', function() {
         isAnimating = true;
         
         // Hide back button
-        card.querySelector('.close-button').classList.add('hidden');
+        const closeBtn = card.querySelector('#close-btn-color');
+        if (closeBtn) {
+            closeBtn.classList.add('hidden');
+        }
         
         // Remove active class
         card.classList.remove('active');

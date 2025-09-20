@@ -202,11 +202,6 @@ Examples:
         document.body.appendChild(appElement);
       }
     }
-
-    // アプリ要素を表示
-    appElement.style.display = 'block';
-    appElement.hidden = false;
-
     // menu.df.base.js の機能を実行（3Dカードレイヤー効果）
     this.showAppCard(appElement);
   }
