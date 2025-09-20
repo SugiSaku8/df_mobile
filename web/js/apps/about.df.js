@@ -13,7 +13,7 @@ export function appInit(shell) {
  		<div class="window" id="about">
     		<div class="title-bar">
         		<div class="title-bar-controls">
-           		        <button id="close-btn-color" onclick="closeWindow()"></button>
+           		        <button id="close-btn-color" onclick=""></button>
                  </div>
                 <div class="title-bar-controls-left">
            		        <button id="open-btn-color" onclick=""></button>
@@ -21,10 +21,10 @@ export function appInit(shell) {
     </div>
     <div class="window-body">
 			<h2>About this Deep-Fried Mobile</h2>
-           <img src="../img/logo.svg" alt="Deep-Fried Mobile" class="about-main-logo">
+           <img src="/web/img/logo.svg" alt="Deep-Fried Mobile" class="about-main-logo">
            <div class="about-sub-images">
-                      <img src="../img/db6.png" alt="Deep-Base Version 6">
-                      <img src="../img/mobile.svg" alt="For Mobile">
+                      <img src="/web/img/db6.png" alt="Deep-Base Version 6">
+                      <img src="/web/img/mobile.svg" alt="For Mobile">
            </div>
         <p style="font-family:'thin';text-size:10vh;">
             Deep-Fried Mobile

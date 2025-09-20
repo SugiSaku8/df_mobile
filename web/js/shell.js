@@ -1,11 +1,12 @@
 import * as welcomeApp from './apps/welcome.df.js';
-
+import * as aboutApp from './apps/about.df.js';
 
 // Deep-Fried-Shell: 全アプリの初期化・表示制御ハブ
 
 
 const appModules = {
   welcome: welcomeApp,
+  about: aboutApp,
 };
 
 // Deep-Fried ログシステム
@@ -215,3 +216,4 @@ if (typeof window !== 'undefined') {
 
 // 例: window.shell = new DeepFriedShell(); window.shell.loadApp('menu'); 
 window.shell.loadApp('welcome'); 
+window.shell.loadApp('about'); 

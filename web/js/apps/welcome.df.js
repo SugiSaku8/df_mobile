@@ -14,7 +14,7 @@
  		<div class="window" id="home">
     		<div class="title-bar">
         		<div class="title-bar-controls">
-           		        <button id="close-btn-color" onclick="closeWindow()"></button>
+           		        <button id="close-btn-color" onclick=""></button>
                  </div>
                 <div class="title-bar-controls-left">
            		        <button id="open-btn-color" onclick=""></button>
