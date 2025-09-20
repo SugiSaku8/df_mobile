@@ -33,15 +33,116 @@
       sizes="128x128"
       href="re/ico/icon_top_128x.png"
     />
+
+    <style>
+        /* Window styles for apps */
+        .window {
+            width: 90%;
+            max-width: 90%;
+            min-height: 200px;
+            margin: 0 auto 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            /* display: none; */ /* 初期状態では非表示にしない */
+        }
+
+        .window.active {
+            z-index: 100;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin: 40px auto;
+        }
+
+        .window.layer_other {
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 90;
+            filter: brightness(0.85) blur(1px);
+        }
+
+        .window.layer_below {
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 90;
+            filter: brightness(0.85) blur(1px);
+        }
+
+        .title-bar {
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .title-bar-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .title-bar-controls button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .title-bar-controls-left {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+        }
+
+        .title-bar-controls-left button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+        }
+
+        .close-btn-color {
+            background-color: #ff5f57;
+        }
+
+        .open-btn-color {
+            background-color: #28ca42;
+        }
+
+        .window-body {
+            padding: 16px;
+            min-height: 200px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
   </head>
   <body>
     <div class="app-container">
       <div class="app-list" id="appList">
         <div id="app-root"></div>
-</div>
+      </div>
     </div>
+
     <script>
-      // ここにグローバルな初期化やフォールバック関数が必要なら記述
+      // Initialize the shell when DOM is loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded, initializing shell...');
+        if (window.shell) {
+          console.log('Shell found, loading apps...');
+          window.shell.loadApp('welcome');
+          window.shell.loadApp('about');
+        } else {
+          console.error('Shell not found');
+        }
+      });
     </script>
   </body>
 </html>

@@ -21,16 +21,14 @@ class DeepFriedShell {
     ];
     this.logDisplays.forEach(d => this.logMemory[d] = []);
     this._activeDisplay = null;
+
     // ds.log.swで呼べるようにlogにswを生やす
     const logFunc = this.log.bind(this);
     logFunc.sw = this.log_sw.bind(this);
     this.log = logFunc;
-    
+
     // バージョン管理機能を初期化
     this._initVersionCommands();
-    
-    window.ds = this; // コマンド用
-    this.loadApp('login');
   }
 
   // バージョン管理コマンドを初期化
@@ -45,7 +43,7 @@ class DeepFriedShell {
         this.log({from: 'dp.sys.version', message: 'Version information displayed', level: 'info'});
         return formatted;
       },
-      
+
       // 特定コンポーネントのバージョン情報を表示
       get: async (component = 'client') => {
         await versionManager.loadVersionConfig();
@@ -54,7 +52,7 @@ class DeepFriedShell {
         this.log({from: 'dp.sys.version', message: `${component} version information displayed`, level: 'info'});
         return formatted;
       },
-      
+
       // 利用可能なコンポーネント一覧
       list: () => {
         const components = ['family', 'client', 'server', 'workmaker', 'toaster'];
@@ -62,7 +60,7 @@ class DeepFriedShell {
         this.log({from: 'dp.sys.version', message: 'Available components listed', level: 'info'});
         return components;
       },
-      
+
       // アップデートチェック
       check: async () => {
         await versionManager.loadVersionConfig();
@@ -71,7 +69,7 @@ class DeepFriedShell {
         this.log({from: 'dp.sys.version', message: 'Update check completed', level: 'info'});
         return updates;
       },
-      
+
       // バージョン比較
       compare: (version1, version2) => {
         const result = versionManager.compareVersions(version1, version2);
@@ -106,7 +104,6 @@ Examples:
       }
     };
   }
-
   // ログ出力API
   log({from = 'dp.sys.unknown', message = '', level = 'info', timestamp = null}) {
     const ts = timestamp || new Date().toISOString();
@@ -187,6 +184,81 @@ Examples:
     this.log({from: `dp.app.${appName}.out`, message: `${appName}アプリを表示中`, level: 'info'});
     this.currentApp = appName;
     this.log({from: `dp.app.${appName}.out`, message: `現在のアプリ: ${appName}`, level: 'info'});
+
+    // アプリ要素を取得または作成
+    let appElement = document.getElementById(`app-${appName}`);
+    if (!appElement) {
+      // アプリ要素が存在しない場合は作成
+      appElement = document.createElement('div');
+      appElement.id = `app-${appName}`;
+      appElement.className = 'window';
+      appElement.style.display = 'block'; // 最初から表示状態に設定
+
+      // app-rootに追加
+      const appRoot = document.getElementById('app-root');
+      if (appRoot) {
+        appRoot.appendChild(appElement);
+      } else {
+        document.body.appendChild(appElement);
+      }
+    }
+
+    // アプリ要素を表示
+    appElement.style.display = 'block';
+    appElement.hidden = false;
+
+    // menu.df.base.js の機能を実行（3Dカードレイヤー効果）
+    this.showAppCard(appElement);
+  }
+
+  // menu.df.base.js の機能を統合
+  showAppCard(card) {
+    const appCards = document.querySelectorAll('.window[id^="app-"]');
+    let isAnimating = false;
+
+    if (isAnimating) return;
+    isAnimating = true;
+
+    // Add active class
+    if (card && card.classList) {
+      card.classList.add('active');
+
+      // Show back button if exists
+      const closeBtn = card.querySelector('.close-btn-color');
+      if (closeBtn && closeBtn.classList) {
+        closeBtn.classList.remove('hidden');
+      }
+
+      // Update other cards with layer effects
+      this.updateCardLayers(card, appCards);
+
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+
+      // Re-enable interaction after animation
+      setTimeout(() => {
+        isAnimating = false;
+      }, 500);
+    }
+  }
+
+  updateCardLayers(activeCard, allCards = null) {
+    const appCards = allCards || document.querySelectorAll('.window[id^="app-"]');
+    const activeIndex = Array.from(appCards).indexOf(activeCard);
+
+    appCards.forEach((card, index) => {
+      if (card === activeCard) return;
+
+      if (index < activeIndex) {
+        // Cards above the active one
+        card.classList.add('layer_other');
+        card.classList.remove('layer_below');
+      } else {
+        // Cards below the active one
+        card.classList.add('layer_below');
+        card.classList.remove('layer_other');
+      }
+    });
   }
 
   loadApp(appName) {
@@ -200,10 +272,18 @@ Examples:
     // app-rootがhiddenやdisplay:noneになっていたら強制的に表示
     appRoot.style.display = '';
     appRoot.hidden = false;
+
+    // アプリが既に初期化済みかチェック
+    if (this.initializedApps.has(appName)) {
+      this.showApp(appName);
+      return;
+    }
+
     this.showApp(appName);
     const appModule = appModules[appName];
     if (appModule && typeof appModule.appInit === 'function') {
       appModule.appInit(this);
+      this.initializedApps.add(appName);
     } else {
       this.log({from: `dp.app.${appName}.err`, message: `アプリ${appName}の初期化関数が見つかりません`, level: 'warn'});
     }
@@ -212,8 +292,4 @@ Examples:
 
 if (typeof window !== 'undefined') {
   window.shell = new DeepFriedShell();
-}
-
-// 例: window.shell = new DeepFriedShell(); window.shell.loadApp('menu'); 
-window.shell.loadApp('welcome'); 
-window.shell.loadApp('about'); 
+} 
