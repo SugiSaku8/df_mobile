@@ -736,6 +736,43 @@ body {
   align-items: center;
   height: calc(100% - 50px);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* 一番上のメイン画像 */
+.about-main-logo {
+  display: block;
+  margin: 0 auto 20px auto;
+  max-width: 200px;
+  height: auto;
+}
+
+/* 下の二つの画像を入れるコンテナ */
+.about-sub-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 10px;
+}
+
+/* 下の二つの画像 */
+.about-sub-images img {
+  max-width: 80px;
+  height: auto;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.window-body p {
+  text-align: center;
+  margin: 10px auto;
+  max-width: 300px;
+  font-family: 'thin', sans-serif;
+  font-weight: 300;
 }
 
 h1 {
