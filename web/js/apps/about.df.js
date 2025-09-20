@@ -1,6 +1,6 @@
   export const appMeta = {
-    name: "home",
-    title: "home",
+    name: "about",
+    title: "About this Deep-Fried Mobile",
 
   };
   
@@ -11,7 +11,7 @@
       return;
     }
     root.innerHTML = `
- 		<div class="window" id="home">
+ 		<div class="window" id="about">
     		<div class="title-bar">
         		<div class="title-bar-controls">
            		        <button id="close-btn-color" onclick="closeWindow()"></button>
@@ -21,8 +21,17 @@
                 </div>
     </div>
     <div class="window-body">
-			<h2>Deep-Fried Mobile</h2>
-            <p>Welcome to All-New Deep-Fried Mobile!</p>	
+			<h2>About this Deep-Fried Mobile</h2>
+           <img src="deepfried.icon.png" alt="Deep-Fried Mobile">
+           <div>
+                      <img src="deepfried.icon.png" alt="Deep-Base Version 6">
+                      <img src="deepfried.icon.png" alt="For Mobile">
+           </div>
+      <p style="font-family:'>
+      Deep-Fried Mobile
+Version 5.5.0
+2025.11.1 Released
+      </p>
          </div>
         </div>
     `;

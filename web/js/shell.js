@@ -1,24 +1,11 @@
-import * as coreConfig from './core/config.js';
+import * as welcomeApp from './apps/welcome.df.js';
 
-function applyLangToDOM() {
-  const { t } = window.coreLang;
-  document.querySelectorAll('[data-lang-key]').forEach(el => {
-    const key = el.getAttribute('data-lang-key');
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-      el.placeholder = t(key);
-    } else {
-      el.textContent = t(key);
-    }
-  });
-}
-window.applyLangToDOM = applyLangToDOM;
 
 // Deep-Fried-Shell: 全アプリの初期化・表示制御ハブ
 
 
 const appModules = {
-  login: loginApp,
-
+  welcome: welcomeApp,
 };
 
 // Deep-Fried ログシステム
@@ -42,7 +29,6 @@ class DeepFriedShell {
     this._initVersionCommands();
     
     window.ds = this; // コマンド用
-    applyLangToDOM();
     this.loadApp('login');
   }
 
@@ -217,13 +203,6 @@ Examples:
     const appModule = appModules[appName];
     if (appModule && typeof appModule.appInit === 'function') {
       appModule.appInit(this);
-      // Initialize parallax effects after app initialization
-      setTimeout(() => {
-        if (parallaxManager && parallaxManager.isInitialized) {
-          parallaxManager.initializeElements();
-          this.log({from: 'dp.sys.shell', message: `Parallax effects initialized for ${appName}`, level: 'info'});
-        }
-      }, 100);
     } else {
       this.log({from: `dp.app.${appName}.err`, message: `アプリ${appName}の初期化関数が見つかりません`, level: 'warn'});
     }
@@ -235,3 +214,4 @@ if (typeof window !== 'undefined') {
 }
 
 // 例: window.shell = new DeepFriedShell(); window.shell.loadApp('menu'); 
+window.shell.loadApp('welcome'); 
