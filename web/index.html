@@ -66,20 +66,12 @@
               app.classList.add('layer_other');
               // Make sure they're not active
               app.classList.remove('active');
-              // Hide any apps that might be visible
-              app.style.display = 'none';
-              app.style.visibility = 'hidden';
-              app.style.opacity = '0';
-              app.style.pointerEvents = 'none';
             });
-            
             // Show welcome app first
             await window.shell.showApp('welcome');
-            
             // Log the state for debugging
             console.log("Current app:", window.shell.currentApp);
             console.log("Initialized apps:", Array.from(window.shell.initializedApps || []));
-            
           } catch (error) {
             console.error("Error initializing apps:", error);
             // Even if there's an error, try to show welcome app if possible

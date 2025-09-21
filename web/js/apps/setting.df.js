@@ -1,6 +1,6 @@
   export const appMeta = {
-    name: "welcome",
-    title: "Welcome",
+    name: "setting",
+    title: "Setting",
     icon: "re/ico/home_32x.png"
   };
   

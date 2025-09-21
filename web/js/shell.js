@@ -287,6 +287,11 @@ Examples:
         prevAppElement.style.visibility = "hidden";
         prevAppElement.style.opacity = "0";
         prevAppElement.style.pointerEvents = "none";
+        // 確実に非表示にするため、強制的にスタイルを設定
+        prevAppElement.style.setProperty("display", "none", "important");
+        prevAppElement.style.setProperty("visibility", "hidden", "important");
+        prevAppElement.style.setProperty("opacity", "0", "important");
+        prevAppElement.style.setProperty("pointer-events", "none", "important");
       }
     }
 
@@ -297,6 +302,12 @@ Examples:
     appElement.style.visibility = "visible";
     appElement.style.opacity = "1";
     appElement.style.pointerEvents = "auto";
+
+    // 確実に表示されるようにするため、強制的にスタイルを設定
+    appElement.style.setProperty("display", "block", "important");
+    appElement.style.setProperty("visibility", "visible", "important");
+    appElement.style.setProperty("opacity", "1", "important");
+    appElement.style.setProperty("pointer-events", "auto", "important");
 
     // アプリが画面の最前面に表示されるようにする
     appElement.style.zIndex = "1000";
@@ -415,6 +426,7 @@ Examples:
           appElement.id = `app-${appName}`;
           appElement.className = "window";
           appElement.style.display = "none"; // 初期状態では非表示
+          appElement.style.setProperty("display", "none", "important");
           appElement.classList.add("layer_other"); // デフォルトでlayer_otherを追加
           appRoot.appendChild(appElement);
           this.log({

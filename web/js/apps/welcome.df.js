@@ -6,12 +6,15 @@
   
   
   
-  export function appInit(shell) {
+  export async function appInit(shell) {
+    return new Promise((resolve) => {
     const root = document.getElementById("app-root");
     if (!root) {
       console.error("HomeApp: #app-rootが見つかりません");
       return;
     }
+    const appElement = document.getElementById('app-welcome');
+    if (appElement) {
     root.innerHTML = `
  		<div class="window" id="home">
     		<div class="title-bar">
@@ -138,5 +141,9 @@
             color: #333;
         }
     `;
-
+} else {
+    console.error('Welcome app element not found');
+    resolve();
+  }
+});
 }
