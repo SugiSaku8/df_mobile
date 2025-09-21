@@ -43,22 +43,54 @@
 
     <script>
       // Initialize the shell when DOM is loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, initializing shell...');
+      document.addEventListener("DOMContentLoaded", async function () {
+        console.log("DOM loaded, initializing shell...");
         if (window.shell) {
-          console.log('Shell found, loading apps...');
-          // First load and show the welcome app
-          window.shell.loadApp('welcome');
-          window.shell.showApp('welcome');
+          console.log("Shell found, loading all apps...");
           
-          // Then load the about app (but don't show it yet)
-          window.shell.loadApp('about');
-
-          // Log the state for debugging
-          console.log('Current app:', window.shell.currentApp);
-          console.log('Initialized apps:', Array.from(window.shell.initializedApps || []));
+          // Define all app names
+          const appNames = ["welcome", "setting", "about"];
+          
+          try {
+            // Load and initialize all apps
+            await Promise.all(appNames.map(appName => 
+              window.shell.loadApp(appName)
+            ));
+            
+            console.log("All apps loaded, setting up initial view...");
+            
+            // Set all apps to layer_other
+            const allApps = document.querySelectorAll('.window[id^="app-"]');
+            allApps.forEach(app => {
+              // Ensure all apps have the layer_other class
+              app.classList.add('layer_other');
+              // Make sure they're not active
+              app.classList.remove('active');
+              // Hide any apps that might be visible
+              app.style.display = 'none';
+              app.style.visibility = 'hidden';
+              app.style.opacity = '0';
+              app.style.pointerEvents = 'none';
+            });
+            
+            // Show welcome app first
+            await window.shell.showApp('welcome');
+            
+            // Log the state for debugging
+            console.log("Current app:", window.shell.currentApp);
+            console.log("Initialized apps:", Array.from(window.shell.initializedApps || []));
+            
+          } catch (error) {
+            console.error("Error initializing apps:", error);
+            // Even if there's an error, try to show welcome app if possible
+            try {
+              await window.shell.showApp('welcome');
+            } catch (e) {
+              console.error("Failed to show welcome app:", e);
+            }
+          }
         } else {
-          console.error('Shell not found');
+          console.error("Shell not found");
         }
       });
     </script>
