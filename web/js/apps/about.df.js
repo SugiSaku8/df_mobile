@@ -1,6 +1,6 @@
 export const appMeta = {
   name: "about",
-  title: "About Deep-Fried Mobile",
+  title: "About This Deep-Fried",
   icon: "re/ico/info_32x.png"
 };
 
