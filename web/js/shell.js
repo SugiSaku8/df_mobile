@@ -1,6 +1,5 @@
 import * as welcomeApp from './apps/welcome.df.js';
 import * as aboutApp from './apps/about.df.js';
-import * as aboutApp from './apps/setting.df.js';
 
 // Deep-Fried-Shell: 全アプリの初期化・表示制御ハブ
 
@@ -8,8 +7,6 @@ import * as aboutApp from './apps/setting.df.js';
 const appModules = {
   welcome: welcomeApp,
   about: aboutApp,
-  setting: settingApp,
-
 };
 
 // Deep-Fried ログシステム

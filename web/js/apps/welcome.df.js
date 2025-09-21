@@ -27,19 +27,19 @@
 			<h1 style="font-size:70px;">Deep-Fried Mobile</h>
             <p style="font-family:'thin';font-size:40px;">Welcome to <br>Deep-Fried Mobile</p>
             <div class="icon-grid">
-                <div class="icon-item" onclick="handleMenuClick('something')">
+                <div class="icon-item" onclick=" window.shell.loadApp('something')">
                     <img src="/web/img/anything.png" alt="SomeThing" class="icon-image">
                     <span class="icon-label">SomeThing</span>
                 </div>
-                <div class="icon-item" onclick="handleMenuClick('net')">
+                <div class="icon-item" onclick=" window.shell.loadApp('net')">
                     <img src="/web/img/net.png" alt="ネット" class="icon-image">
                     <span class="icon-label">ネット</span>
                 </div>
-                <div class="icon-item" onclick="handleMenuClick('lilkau')">
+                <div class="icon-item" onclick=" window.shell.loadApp('lilkau')">
                     <img src="/web/img/shop.png" alt="ショップ" class="icon-image">
                     <span class="icon-label">Lilkau</span>
                 </div>
-                <div class="icon-item" onclick="handleMenuClick('setting')">
+                <div class="icon-item" onclick=" window.shell.loadApp('setting')">
                     <img src="/web/img/setting.png" alt="設定" class="icon-image">
                     <span class="icon-label">設定</span>
                 </div>
@@ -138,25 +138,5 @@
             color: #333;
         }
     `;
-    function handleMenuClick(action) {
-        console.log(`Menu item clicked: ${action}`);
-        // Add your menu item click handling logic here
-        switch(action) {
-          case 'settings':
-              window.shell.loadApp("setting");
-            break;
-          case 'net':
-            // Handle backup click
-            console.log('Initiating backup...');
-            break;
-          case 'lilkau':
-            // Handle restore click
-            console.log('Initiating restore...');
-            break;
-          case 'something':
-            // Handle version info click
-            console.log('Showing version info...');
-            break;
-        }
-      } 
-  }
+
+}
