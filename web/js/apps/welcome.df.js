@@ -5,27 +5,7 @@
   };
   
   
-  function handleMenuClick(action) {
-    console.log(`Menu item clicked: ${action}`);
-    // Add your menu item click handling logic here
-    switch(action) {
-      case 'settings':
-          window.shell.loadApp("setting");
-        break;
-      case 'net':
-        // Handle backup click
-        console.log('Initiating backup...');
-        break;
-      case 'lilkau':
-        // Handle restore click
-        console.log('Initiating restore...');
-        break;
-      case 'something':
-        // Handle version info click
-        console.log('Showing version info...');
-        break;
-    }
-  } 
+  
   export function appInit(shell) {
     const root = document.getElementById("app-root");
     if (!root) {
@@ -158,5 +138,25 @@
             color: #333;
         }
     `;
-  
+    function handleMenuClick(action) {
+        console.log(`Menu item clicked: ${action}`);
+        // Add your menu item click handling logic here
+        switch(action) {
+          case 'settings':
+              window.shell.loadApp("setting");
+            break;
+          case 'net':
+            // Handle backup click
+            console.log('Initiating backup...');
+            break;
+          case 'lilkau':
+            // Handle restore click
+            console.log('Initiating restore...');
+            break;
+          case 'something':
+            // Handle version info click
+            console.log('Showing version info...');
+            break;
+        }
+      } 
   }
