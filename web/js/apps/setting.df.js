@@ -13,7 +13,7 @@
       return;
     }
     root.innerHTML = `
- 		<div class="window" id="home">
+ 		<div class="window" id="setttttt">
     		<div class="title-bar">
         		<div class="title-bar-controls">
            		        <button id="close-btn-color" onclick=""></button>
@@ -24,27 +24,9 @@
     </div>
     <div class="window-body">
               <img src="/web/img/logo.svg" alt="Deep-Fried Mobile" class="about-logo">
-			<h1 style="font-size:70px;">Deep-Fried Mobile</h>
-            <p style="font-family:'thin';font-size:40px;">Welcome to <br>Deep-Fried Mobile</p>
-            <div class="icon-grid">
-                <div class="icon-item" onclick="window.shell.loadApp('something')&window.shell.showApp('something')">
-                    <img src="/web/img/anything.png" alt="SomeThing" class="icon-image">
-                    <span class="icon-label">SomeThing</span>
-                </div>
-                <div class="icon-item" onclick="window.shell.loadApp('net')&window.shell.showApp('net')">
-                    <img src="/web/img/net.png" alt="ネット" class="icon-image">
-                    <span class="icon-label">ネット</span>
-                </div>
-                <div class="icon-item" onclick="window.shell.loadApp('lilkau')&window.shell.showApp('lilkau')">
-                    <img src="/web/img/shop.png" alt="ショップ" class="icon-image">
-                    <span class="icon-label">Lilkau</span>
-                </div>
-                <div class="icon-item" onclick="window.shell.loadApp('setting')&window.shell.showApp('setting')">
-                    <img src="/web/img/setting.png" alt="設定" class="icon-image">
-                    <span class="icon-label">設定</span>
-                </div>
-            </div>
-        </div>
+			<h1 style="font-size:50px;">Deep-Fried Mobile  Setting</h>
+            <p style="font-family:'thin';font-size:40px;">Setting is developing now</p>
+                   </div>
     </div>
     <style>
         .about-logo {
