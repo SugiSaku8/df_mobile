@@ -1,7 +1,7 @@
   export const appMeta = {
-    name: "home",
-    title: "home",
-
+    name: "welcome",
+    title: "Welcome",
+    icon: "re/ico/home_32x.png"
   };
   
   export function appInit(shell) {
@@ -21,10 +21,18 @@
                 </div>
     </div>
     <div class="window-body">
+              <img src="/web/img/logo.svg" alt="Deep-Fried Mobile" class="about-logo">
 			<h2>Deep-Fried Mobile</h2>
             <p>Welcome to All-New Deep-Fried Mobile!</p>	
          </div>
         </div>
+        <style>
+         .about-logo {
+        width: 120px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+        </style>
     `;
   }
   

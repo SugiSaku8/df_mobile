@@ -214,6 +214,10 @@ Examples:
     
     // 現在のアプリを表示
     appElement.style.display = 'block';
+    appElement.style.visibility = 'visible';
+    appElement.style.opacity = '1';
+    appElement.style.pointerEvents = 'auto';
+    appElement.classList.add('active');
     
     // menu.df.base.js の機能を実行（3Dカードレイヤー効果）
     this.showAppCard(appElement);

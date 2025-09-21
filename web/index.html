@@ -47,10 +47,16 @@
         console.log('DOM loaded, initializing shell...');
         if (window.shell) {
           console.log('Shell found, loading apps...');
+          // First load and show the welcome app
           window.shell.loadApp('welcome');
-          window.shell.loadApp('about');
           window.shell.showApp('welcome');
-          window.shell.showApp('about');
+          
+          // Then load the about app (but don't show it yet)
+          window.shell.loadApp('about');
+
+          // Log the state for debugging
+          console.log('Current app:', window.shell.currentApp);
+          console.log('Initialized apps:', Array.from(window.shell.initializedApps || []));
         } else {
           console.error('Shell not found');
         }
