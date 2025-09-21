@@ -1,6 +1,4 @@
 /*SpaceUI var:7.0.0.alpha.01*/
-
-
 			@font-face {
 				font-family: 'thin';
 				src: url('./Font/Apple/SFProJP_細い.woff')format('woff');
@@ -661,72 +659,217 @@
   }
 }
 
-/*ウィンドウcss*/
-
+/* カードベースのウィンドウスタイル */
 @keyframes movingGradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
+
+/* メインコンテナ */
 .app-container {
   width: 100%;
-  height: 100%;
-  position: relative;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
+  background-color: #f0f2f5;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
 }
 
+/* アプリリスト（スクロール可能） */
 .app-list {
   width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px 0;
   perspective: 2000px;
   transform-style: preserve-3d;
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+  box-sizing: border-box;
 }
 
+/* カードの基本スタイル */
 .window {
-  width: 80%;
-  max-width: 1200px;
-  min-height: 200px;
+  width: 94%;
+  max-width: 850px;
+  min-height: 350px;
   margin: 20px auto;
-  max-height: 800px;
   background: linear-gradient(
     270deg,
-    rgba(135, 206, 235, 0.1),
-    rgba(100, 149, 237, 0.1),
-    rgba(46, 134, 218, 0.1)
+    rgba(255, 255, 255, 0.98),
+    rgba(250, 250, 255, 0.98)
   );
-  background-size: 400% 400%;
-  border-radius: 25px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
-  font-family: Arial, sans-serif;
+  background-size: 200% 200%;
+  border-radius: 28px;
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Icons', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  transform-origin: center top;
+  will-change: transform, opacity, box-shadow;
+  backface-visibility: hidden;
+  -webkit-backdrop-filter: blur(15px);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  box-sizing: border-box;
+  max-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  font-size: 1.05em;
+  line-height: 1.6;
+}
+
+/* アクティブなカード */
+.window#layer_top {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.5s ease;
-  animation: movingGradient 30s ease infinite;
+  transform: translate(-50%, -50%) scale(1);
+  z-index: 1000;
+  max-height: 96vh;
+  height: auto;
+  max-width: 98%;
+  width: 1000px;
+  margin: 0;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  pointer-events: auto;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+/* アクティブカードより上のカード（縮小・半透明） */
+.window.layer_other {
+  transform: scale(0.95);
+  opacity: 0.7;
+  pointer-events: none;
+  z-index: 900;
+  filter: brightness(0.95);
+  position: relative;
+  margin: 10px auto;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* アクティブカードより下のカード（非表示） */
+.window:not(#layer_top):not(.layer_other) {
+  opacity: 0;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: scale(0.8);
+  visibility: hidden;
+}
+
+/* カードのコンテンツ領域 */
+.window-body {
+  padding: 30px 35px;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.15em;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* タイトルバーのスタイル */
+.title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* カードがアクティブになった時のアニメーション */
+@keyframes cardActivate {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: translateY(-10%) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* スクロールバーのスタイリング */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
 }
 /*iPhone17対応 - Mobile responsive window sizing (1179px)*/
 @media screen and (max-width: 900px) {
+  .app-list {
+    padding: 10px 0 80px;
+  }
+
   .window {
-    width: 95%;
+    width: 92%;
     max-width: 100%;
-    min-height: 200px;
-    margin: 10px auto;
-    max-height: 100vh;
-    border-radius: 25px;
+    min-height: 180px;
+    margin: 12px auto;
+    border-radius: 18px;
+  }
+
+  .window#layer_top {
+    max-height: 90vh;
+    width: 95%;
+    border-radius: 20px;
   }
 
   .window.layer_other {
-    transform: scale(0.95) translateZ(-100px) rotateX(3deg) translate(-50%, -50%);
+    transform: scale(0.92);
+    opacity: 0.6;
+    margin: 8px auto;
   }
 
   .title-bar {
@@ -801,17 +944,7 @@
   }
 }
 
-.window.layer_other {
-  transform: scale(0.92) translateZ(-150px) rotateX(5deg) translate(-50%, -50%);
-  opacity: 50%;
-  pointer-events: none;
-  z-index: 90;
-  filter: brightness(0.85) blur(1px);
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-}
+/* Moved to .window.layer_other above */
 
 .title-bar {
   display: flex;
